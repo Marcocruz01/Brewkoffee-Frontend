@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BrewKoffee 
+
+A full-stack Point of Sale (POS) system built for coffee shop operations — from taking orders to managing the kitchen queue, tracking tables, and processing payments.
+
+## Overview
+
+BrewKoffee is a role-based operational system with three dedicated interfaces:
+
+- **Admin** — manage the product catalog, categories, employees, tables, and view business analytics through a live dashboard.
+- **Waiter** — take orders (dine-in or takeout), track order status in real time, manage table assignments, and process payments.
+- **Kitchen** — receive incoming orders, accept and prepare them, and mark them ready for service.
+
+## Tech Stack
+
+**Frontend**
+- Next.js (App Router) + TypeScript
+- Tailwind CSS + shadcn/ui (Base UI)
+- Zod for validation
+- Recharts for dashboard analytics
+
+**Backend**
+- Node.js + Express
+- Prisma ORM + PostgreSQL
+- JWT authentication with role-based access control
+- Zod validators on every endpoint
+
+## Core Features
+
+- **Authentication & Roles** — JWT-based auth with `ADMIN`, `WAITER`, and `KITCHEN` roles, each with scoped route access.
+- **Product Catalog** — categories, products, and variants with Cloudinary image uploads.
+- **Order Management** — full lifecycle from `PENDING` → `IN_PROGRESS` → `READY` → `DELIVERED`, supporting both dine-in and takeout orders, with multiple order rounds per table.
+- **Table Management** — real-time table status (`AVAILABLE`, `OCCUPIED`, `RESERVED`) tied directly to active orders.
+- **Payments** — cash and card checkout flow, decoupled from order status (`paid` as an independent field), supporting split payments per table.
+- **Kitchen Board** — Kanban-style interface for accepting and preparing incoming orders.
+- **Admin Dashboard** — daily/weekly sales, top-selling products, payment method breakdown, and recent order activity.
+- **Order History** — full audit trail of all orders with filtering and management controls.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Backend
+cd server
+npm install
+npx prisma migrate dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Frontend
+cd client
+npm install
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set up your `.env` files with `DATABASE_URL`, `JWT_SECRET`, `API_BACKEND_URL`, and Cloudinary credentials before running.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## License
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for portfolio/educational purposes.
